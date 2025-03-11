@@ -3,9 +3,9 @@ package kioskproject;
 import java.util.Scanner;
 
 public class MenuItem {
-    public String food;
-    public int price;
-    public String explain;
+    private String food;
+    private int price;
+    private String explain;
 
     MenuItem (String food, int price, String explain) {
         this.food = food;
@@ -19,6 +19,14 @@ public class MenuItem {
 
     public String getFood() {
         return food;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getExplain() {
+        return explain;
     }
 
     public void selectMenu(Scanner scanner) throws IllegalArgumentException{
