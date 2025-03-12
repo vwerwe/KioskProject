@@ -1,5 +1,7 @@
 package kioskproject;
 
+import java.util.Scanner;
+
 public class MenuItem {
     private String food;
     private int price;
@@ -11,14 +13,39 @@ public class MenuItem {
         this.explain = explain;
     }
 
-    MenuItem hamburger1 = new MenuItem("TeriBurger", 3500, "소스에서 숯불 및 마늘 향이 강하다.");
-    MenuItem hamburger2 = new MenuItem("BulgogiBurger", 4700, "다소 삼삼한 맛이다.");
-    MenuItem hamburger3 = new MenuItem("ChickenBurger", 4000, "번, 닭다리살패티, 데리야키소스, 양상추, 마요네즈, 머스타드로 구성되어 있다.");
-    MenuItem hamburger4 = new MenuItem("Shrimp", 4700, "빵, 타르타르 소스, 새우 패티, 양상추, 사우전드 아일랜드 드레싱, 빵으로 구성되어 있다.");
+    public void printMenu() {
+        System.out.println(food + "   | W " + price + " |   " + explain);
+    }
+
+    public void selectMenu() {
+        System.out.println("선택한 메뉴 : " + food + "   | W " + price + " |   " + explain);
+    }
+
+    public String getFood() {
+        return food;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getExplain() {
+        return explain;
+    }
+
+    public void selectMenu(Scanner scanner) throws IllegalArgumentException{
+        System.out.println(food + "   | W " + price + " |   " + explain);
+
+        System.out.println("0. 뒤로가기");
+        int input = scanner.nextInt();
+        if (input == 0) {
+            scanner.nextLine();
+            return;
+        } else {
+            scanner.nextLine();
+            throw new IllegalArgumentException("잘못된 입력입니다.");
+        }
 
 
-
-
-
-
+    }
 }
