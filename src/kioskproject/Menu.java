@@ -18,27 +18,33 @@ public class Menu {
 
 
     public void printBurger() {
-        System.out.println("[1. Burger]");
+        int i = 1;
+        System.out.println("[ Burgers ]");
         for (MenuItem item : burgerList) {
-            System.out.println(item.getFood() + "   | W " + item.getPrice() + " |   " + item.getExplain());
+            System.out.println(i + ". " + item.getFood() + "   | W " + item.getPrice() + " |   " + item.getExplain());
+            i++;
         }
         System.out.println("0. 뒤로가기");
     }
 
 
     public void printDrink() {
-        System.out.println("[2. Drink]");
+        int i = 1;
+        System.out.println("[ Drinks ]");
         for (MenuItem item : drinkList) {
-            System.out.println(item.getFood() + "   | W " + item.getPrice() + " |   " + item.getExplain());
+            System.out.println(i + ". " + item.getFood() + "   | W " + item.getPrice() + " |   " + item.getExplain());
+            i++;
         }
         System.out.println("0. 뒤로가기");
     }
 
 
     public void printDessert() {
-        System.out.println("[3. Dessert]");
+        int i = 1;
+        System.out.println("[ Desserts ]");
         for (MenuItem item : dessertList) {
-            System.out.println(item.getFood() + "   | W " + item.getPrice() + " |   " + item.getExplain());
+            System.out.println(i + ". " + item.getFood() + "   | W " + item.getPrice() + " |   " + item.getExplain());
+            i++;
         }
         System.out.println("0. 뒤로가기");
     }
@@ -49,6 +55,12 @@ public class Menu {
         System.out.println("2. Drinks");
         System.out.println("3. Desserts");
         System.out.println("0. 종료");
+    }
+
+    public void printOrderMenu() {
+        System.out.println("[ ORDER MENU]");
+        System.out.println("4. Orders   | 장바구니를 확인 후 주문합니다.");
+        System.out.println("5. Cancle   | 진행중인 주문을 취소합니다.");
     }
 
 
