@@ -17,6 +17,10 @@ public class MenuItem {
         System.out.println(food + "   | W " + price + " |   " + explain);
     }
 
+    public void selectMenu() {
+        System.out.println("선택한 메뉴 : " + food + "   | W " + price + " |   " + explain);
+    }
+
     public String getFood() {
         return food;
     }

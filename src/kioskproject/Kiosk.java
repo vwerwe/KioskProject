@@ -1,14 +1,10 @@
 package kioskproject;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Kiosk {
 
-    List<Menu> menuList;
-
+    private List<Menu> menuList;
 
     public Kiosk(List<Menu> item) {
         this.menuList = item;
@@ -27,15 +23,17 @@ public class Kiosk {
         }
     }
 
-    public void showALl() {
-        Menu menu = menuList.get(0);
-        menu.printAll();
+
+    public void showDessert() {
+        for (Menu menu : menuList) {
+            menu.printDessert();
+        }
     }
 
-
-
-
-
+    public void showCategory() {
+        Menu menu = menuList.get(0);
+        menu.printCategory();
+    }
 
 
     public void start() {
@@ -45,56 +43,98 @@ public class Kiosk {
 
         boolean exit = true;
 
-        showBurger();
-        System.out.println();
-        showDrink();
 
-        System.out.println("메뉴를 선택하세요");
-        int choiceMenu1 = scanner.nextInt();
-        switch (choiceMenu1) {
-            case 1 : showBurger();
-            break;
-            case 2 : showDrink();
-            break;
-            default :
-                System.out.println("잘못된 입력입니다.");
-        }
 
-        System.out.println("메뉴를 선택하세요");
-        int choiceMenu2 = scanner.nextInt();
-        if(choiceMenu1 == 1) {
-            switch (choiceMenu2) {
-                case 1 : menuBox.getBurgerList().get(0).printMenu();
-                break;
-                case 2 : menuBox.getBurgerList().get(1).printMenu();
-                break;
-                case 3 : menuBox.getBurgerList().get(2).printMenu();
-                break;
-                case 4 : menuBox.getBurgerList().get(3).printMenu();
-                break;
-                default:
-                    System.out.println("잘못된 입력입니다");
+        while(exit) {
+
+            try {
+
+                showCategory();
+
+                System.out.println("메뉴를 선택하세요");
+                int choiceMenu1 = scanner.nextInt();
+                scanner.nextLine();
+                switch (choiceMenu1) {
+                    case 0 : return;
+                    case 1 : showBurger();
+                        break;
+                    case 2 : showDrink();
+                        break;
+                    case 3 : showDessert();
+                        break;
+                    default :
+                        System.out.println("잘못된 입력입니다.");
+                        continue;
+                }
+
+                System.out.println("메뉴를 선택하세요");
+                int choiceMenu2 = scanner.nextInt();
+                scanner.nextLine();
+                if(choiceMenu1 == 1) {
+                    switch (choiceMenu2) {
+                        case 0 : continue;
+                        case 1 : menuBox.getBurgerList().get(0).selectMenu();
+                            break;
+                        case 2 : menuBox.getBurgerList().get(1).selectMenu();
+                            break;
+                        case 3 : menuBox.getBurgerList().get(2).selectMenu();
+                            break;
+                        case 4 : menuBox.getBurgerList().get(3).selectMenu();
+                            break;
+                        default:
+                            System.out.println("잘못된 입력입니다");
+                            continue;
+                    }
+                }
+                if(choiceMenu1 == 2) {
+                    switch (choiceMenu2) {
+                        case 1 : menuBox.getDrinkList().get(0).selectMenu();
+                            break;
+                        case 2 : menuBox.getDrinkList().get(1).selectMenu();
+                            break;
+                        case 3 : menuBox.getDrinkList().get(2).selectMenu();
+                            break;
+                        case 4 : menuBox.getDrinkList().get(3).selectMenu();
+                            break;
+                        default:
+                            System.out.println("잘못된 입력입니다");
+                    }
+                }
+                if(choiceMenu1 == 3) {
+                    switch (choiceMenu2) {
+                        case 1 :
+                            menuBox.getDessertList().get(0).selectMenu();
+                            break;
+                        case 2 :
+                            menuBox.getDessertList().get(1).selectMenu();
+                            break;
+                        case 3 : menuBox.getDessertList().get(2).selectMenu();
+                            break;
+                        case 4 : menuBox.getDessertList().get(3).selectMenu();
+                            break;
+                        default:
+                            System.out.println("잘못된 입력입니다");
+                    }
+                }
+
+                System.out.println("위 메뉴를 장바구니에 추가하시겠습니까? \n 1.확인     2.취소");
+
+                int choiceBuy = scanner.nextInt();
+
+
+            } catch (InputMismatchException e) {
+                System.out.println("잘못된 입력입니다");
+                scanner.nextLine();
+                continue;
             }
-        }
-        if(choiceMenu1 == 2) {
-            switch (choiceMenu2) {
-                case 1 : menuBox.getDrinkList().get(0).printMenu();
-                    break;
-                case 2 : menuBox.getDrinkList().get(1).printMenu();
-                    break;
-                case 3 : menuBox.getDrinkList().get(2).printMenu();
-                    break;
-                case 4 : menuBox.getDrinkList().get(3).printMenu();
-                    break;
-                default:
-                    System.out.println("잘못된 입력입니다");
-            }
+
+
+
         }
 
 
 
     }
-
 
 }
 
