@@ -17,11 +17,4 @@ public class Orders {
         return price;
     }
 
-    public void printMenu() {
-        System.out.println(menu);
-    }
-
-    public void printPrice() {
-        System.out.println(price);
-    }
 }

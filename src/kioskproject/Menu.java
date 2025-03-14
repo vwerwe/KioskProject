@@ -2,6 +2,7 @@ package kioskproject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class Menu {
 
@@ -18,34 +19,22 @@ public class Menu {
 
 
     public void printBurger() {
-        int i = 1;
         System.out.println("[ Burgers ]");
-        for (MenuItem item : burgerList) {
-            System.out.println(i + ". " + item.getFood() + "   | W " + item.getPrice() + " |   " + item.getExplain());
-            i++;
-        }
+        IntStream.range(0, burgerList.size()).forEach(i -> System.out.println((i + 1) + ". " + burgerList.get(i).getFood() + "   | W " + burgerList.get(i).getPrice() + " |   " + burgerList.get(i).getExplain()));
         System.out.println("0. 뒤로가기");
     }
 
 
     public void printDrink() {
-        int i = 1;
         System.out.println("[ Drinks ]");
-        for (MenuItem item : drinkList) {
-            System.out.println(i + ". " + item.getFood() + "   | W " + item.getPrice() + " |   " + item.getExplain());
-            i++;
-        }
+        IntStream.range(0, drinkList.size()).forEach(i -> System.out.println((i + 1) + ". " + drinkList.get(i).getFood() + "   | W " + drinkList.get(i).getPrice() + " |   " + drinkList.get(i).getExplain()));
         System.out.println("0. 뒤로가기");
     }
 
 
     public void printDessert() {
-        int i = 1;
         System.out.println("[ Desserts ]");
-        for (MenuItem item : dessertList) {
-            System.out.println(i + ". " + item.getFood() + "   | W " + item.getPrice() + " |   " + item.getExplain());
-            i++;
-        }
+        IntStream.range(0, dessertList.size()).forEach(i -> System.out.println((i + 1) + ". " + dessertList.get(i).getFood() + "   | W " + dessertList.get(i).getPrice() + " |   " + dessertList.get(i).getExplain()));
         System.out.println("0. 뒤로가기");
     }
 
