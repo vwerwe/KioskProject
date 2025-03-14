@@ -7,7 +7,7 @@ public class MenuItem {
     private int price;
     private String explain;
 
-    MenuItem (String food, int price, String explain) {
+    MenuItem(String food, int price, String explain) {
         this.food = food;
         this.price = price;
         this.explain = explain;
@@ -33,7 +33,7 @@ public class MenuItem {
         return explain;
     }
 
-    public void selectMenu(Scanner scanner) throws IllegalArgumentException{
+    public void selectMenu(Scanner scanner) throws IllegalArgumentException {
         System.out.println(food + "   | W " + price + " |   " + explain);
 
         System.out.println("0. 뒤로가기");

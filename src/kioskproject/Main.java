@@ -1,6 +1,7 @@
 package kioskproject;
 
 import java.util.*;
+import java.util.function.Supplier;
 
 public class Main {
 
@@ -30,11 +31,6 @@ public class Main {
 
         Kiosk kiosk = new Kiosk(List.of(menuList));
         kiosk.start();
-
-
-
-
-
 
 
     }

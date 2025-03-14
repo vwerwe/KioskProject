@@ -11,34 +11,6 @@ public class Kiosk {
         this.menuList = item;
     }
 
-    //주문하기
-    public void showOrders(Scanner scanner) {
-        System.out.println("아래와 같이 주문 하시겠습니까?");
-        System.out.println();
-        System.out.println("[ Orders ]");
-        int total = 0;
-        for (Orders o : orderList) {
-            System.out.println(o.getMenu() + "   |   " + o.getPrice());
-            total += o.getPrice();
-        }
-        System.out.println("[ Total ]");
-        System.out.println("W " + total);
-        System.out.println();
-        System.out.println("1. 주문        2. 메뉴판");
-        int order = scanner.nextInt();
-        if (order == 1) {
-            System.out.println("주문이 완료되었습니다. 금액은 " + total + "원 입니다.");
-            System.out.println();
-            System.out.println();
-            orderList = new ArrayList<>();
-        } else if (order == 2) {
-            System.out.println("메뉴판으로 돌아갑니다.");
-            return;
-        } else {
-            System.out.println("잘못된 입력입니다.");
-        }
-    }
-
     //버거 메뉴판
     public void showBurger() {
         for (Menu menu : menuList) {
@@ -72,6 +44,56 @@ public class Kiosk {
         menu.printOrderMenu();
     }
 
+    // 할인정보 체크
+    public double disCheck(int item) {
+        for (Customer e : Customer.values()) {
+            if (item == e.getNumber()) {
+                return e.getDiscount();
+            }
+        }
+        return 0;
+    }
+
+    //주문하기
+    public void checkOrder(Scanner scanner) {
+        System.out.println("아래와 같이 주문 하시겠습니까?");
+        System.out.println();
+        System.out.println("[ Orders ]");
+        int total = 0;
+        for (Orders o : orderList) {
+            System.out.println(o.getMenu() + "   |   " + o.getPrice());
+            total += o.getPrice();
+        }
+        System.out.println("[ Total ]");
+        System.out.println("W " + total);
+        System.out.println();
+        System.out.println("1. 주문        2. 메뉴판");
+        int order = scanner.nextInt();
+        if (order == 1) {
+            System.out.println("할인 정보를 입력해주세요");
+            System.out.println("1. 국가유공자 : 10%");
+            System.out.println("2. 군인      : 5%");
+            System.out.println("3. 학생      : 3%");
+            System.out.println("4. 일반      : 0%");
+
+            int input = scanner.nextInt();
+            double discount = disCheck(input);
+            int finalTotal, discountPrice = 0;
+            discountPrice = (int) (total * discount);
+            finalTotal = total - discountPrice;
+
+            System.out.println("할인 금액 : " + discountPrice + "원");
+            System.out.println("주문이 완료되었습니다. 금액은 " + finalTotal + "원 입니다.");
+            orderList = new ArrayList<>();
+
+        } else if (order == 2) {
+            System.out.println("메뉴판으로 돌아갑니다.");
+            return;
+        } else {
+            System.out.println("잘못된 입력입니다.");
+        }
+    }
+
 
     public void start() {
 
@@ -81,7 +103,7 @@ public class Kiosk {
         Menu menuBox = menuList.get(0);
         boolean exit = true;
 
-        while(exit) {
+        while (exit) {
 
             try {
                 showCategory();
@@ -93,17 +115,25 @@ public class Kiosk {
                 int choiceMenu1 = scanner.nextInt();
                 //선택한 카테고리에 맞게 메뉴판 출력
                 switch (choiceMenu1) {
-                    case 0 : return;
-                    case 1 : showBurger();
+                    case 0:
+                        return;
+                    case 1:
+                        showBurger();
                         break;
-                    case 2 : showDrink();
+                    case 2:
+                        showDrink();
                         break;
-                    case 3 : showDessert();
+                    case 3:
+                        showDessert();
                         break;
-                    case 4 :
-                        showOrders(scanner);
+                    case 4:
+                        if (orderList.isEmpty()) {
+                            throw new Exception("장바구니가 비어있습니다.");
+                        } else {
+                            checkOrder(scanner);
+                        }
                         continue;
-                    default :
+                    default:
                         System.out.println("잘못된 입력입니다.");
                         continue;
                 }
@@ -111,22 +141,27 @@ public class Kiosk {
                 System.out.println("메뉴를 선택하세요");
                 int choiceMenu2 = scanner.nextInt();
                 //버거 메뉴판 출력과 선택한 메뉴 장바구니에 담기
-                if(choiceMenu1 == 1) {
+                if (choiceMenu1 == 1) {
                     switch (choiceMenu2) {
-                        case 0 : continue;
-                        case 1 : menuBox.getBurgerList().get(0).selectMenu();
+                        case 0:
+                            continue;
+                        case 1:
+                            menuBox.getBurgerList().get(0).selectMenu();
                             orderMenu = menuBox.getBurgerList().get(0).getFood();
                             orderPrice = menuBox.getBurgerList().get(0).getPrice();
                             break;
-                        case 2 : menuBox.getBurgerList().get(1).selectMenu();
+                        case 2:
+                            menuBox.getBurgerList().get(1).selectMenu();
                             orderMenu = menuBox.getBurgerList().get(1).getFood();
                             orderPrice = menuBox.getBurgerList().get(1).getPrice();
                             break;
-                        case 3 : menuBox.getBurgerList().get(2).selectMenu();
+                        case 3:
+                            menuBox.getBurgerList().get(2).selectMenu();
                             orderMenu = menuBox.getBurgerList().get(2).getFood();
                             orderPrice = menuBox.getBurgerList().get(2).getPrice();
                             break;
-                        case 4 : menuBox.getBurgerList().get(3).selectMenu();
+                        case 4:
+                            menuBox.getBurgerList().get(3).selectMenu();
                             orderMenu = menuBox.getBurgerList().get(3).getFood();
                             orderPrice = menuBox.getBurgerList().get(3).getPrice();
                             break;
@@ -136,22 +171,27 @@ public class Kiosk {
                     }
                 }
                 //음료 메뉴판 출력과 선택한 메뉴 장바구니에 담기
-                if(choiceMenu1 == 2) {
+                if (choiceMenu1 == 2) {
                     switch (choiceMenu2) {
-                        case 0 : continue;
-                        case 1 : menuBox.getDrinkList().get(0).selectMenu();
+                        case 0:
+                            continue;
+                        case 1:
+                            menuBox.getDrinkList().get(0).selectMenu();
                             orderMenu = menuBox.getDrinkList().get(0).getFood();
                             orderPrice = menuBox.getDrinkList().get(0).getPrice();
                             break;
-                        case 2 : menuBox.getDrinkList().get(1).selectMenu();
+                        case 2:
+                            menuBox.getDrinkList().get(1).selectMenu();
                             orderMenu = menuBox.getDrinkList().get(1).getFood();
                             orderPrice = menuBox.getDrinkList().get(1).getPrice();
                             break;
-                        case 3 : menuBox.getDrinkList().get(2).selectMenu();
+                        case 3:
+                            menuBox.getDrinkList().get(2).selectMenu();
                             orderMenu = menuBox.getDrinkList().get(2).getFood();
                             orderPrice = menuBox.getDrinkList().get(2).getPrice();
                             break;
-                        case 4 : menuBox.getDrinkList().get(3).selectMenu();
+                        case 4:
+                            menuBox.getDrinkList().get(3).selectMenu();
                             orderMenu = menuBox.getDrinkList().get(3).getFood();
                             orderPrice = menuBox.getDrinkList().get(3).getPrice();
                             break;
@@ -161,22 +201,27 @@ public class Kiosk {
                     }
                 }
                 //디저트 메뉴판 출력과 선택한 메뉴 장바구니에 담기
-                if(choiceMenu1 == 3) {
+                if (choiceMenu1 == 3) {
                     switch (choiceMenu2) {
-                        case 0 : continue;
-                        case 1 : menuBox.getDessertList().get(0).selectMenu();
+                        case 0:
+                            continue;
+                        case 1:
+                            menuBox.getDessertList().get(0).selectMenu();
                             orderMenu = menuBox.getDessertList().get(0).getFood();
                             orderPrice = menuBox.getDessertList().get(0).getPrice();
                             break;
-                        case 2 : menuBox.getDessertList().get(1).selectMenu();
+                        case 2:
+                            menuBox.getDessertList().get(1).selectMenu();
                             orderMenu = menuBox.getDessertList().get(1).getFood();
                             orderPrice = menuBox.getDessertList().get(1).getPrice();
                             break;
-                        case 3 : menuBox.getDessertList().get(2).selectMenu();
+                        case 3:
+                            menuBox.getDessertList().get(2).selectMenu();
                             orderMenu = menuBox.getDessertList().get(2).getFood();
                             orderPrice = menuBox.getDessertList().get(2).getPrice();
                             break;
-                        case 4 : menuBox.getDessertList().get(3).selectMenu();
+                        case 4:
+                            menuBox.getDessertList().get(3).selectMenu();
                             orderMenu = menuBox.getDessertList().get(3).getFood();
                             orderPrice = menuBox.getDessertList().get(3).getPrice();
                             break;
@@ -199,8 +244,8 @@ public class Kiosk {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("잘못된 입력입니다");
-                scanner.nextLine();
-                continue;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
 
         }
