@@ -13,23 +13,17 @@ public class Kiosk {
 
     //버거 메뉴판
     public void showBurger() {
-        for (Menu menu : menuList) {
-            menu.printBurger();
-        }
+        menuList.forEach(Menu::printBurger);
     }
 
     //음료 메뉴판
     public void showDrink() {
-        for (Menu menu : menuList) {
-            menu.printDrink();
-        }
+        menuList.forEach(Menu::printDrink);
     }
 
     //디저트 메뉴판
     public void showDessert() {
-        for (Menu menu : menuList) {
-            menu.printDessert();
-        }
+        menuList.forEach(Menu::printDessert);
     }
 
     //상위 메뉴판
