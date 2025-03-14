@@ -88,7 +88,6 @@ public class Kiosk {
 
         } else if (order == 2) {
             System.out.println("메뉴판으로 돌아갑니다.");
-            return;
         } else {
             System.out.println("잘못된 입력입니다.");
         }
