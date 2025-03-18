@@ -7,8 +7,7 @@ import java.util.stream.IntStream;
 public class Menu {
 
     private List<MenuItem> burgerList;
-    private List<MenuItem> drinkList;
-    private List<MenuItem> dessertList;
+
 
 
     public Menu(List<MenuItem> item1, List<MenuItem> item2, List<MenuItem> item3) {
